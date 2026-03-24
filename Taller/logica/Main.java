@@ -6,7 +6,7 @@ public class Main {
 	
 	public static void main(String[] args)	{
 		
-		System.out.println("hola mundo, intento aprender o entender como hacer un commit con VS Code");
+		System.out.println("hola mundo, intento aprender o entender como hacer un commit con VS Code aydua Dx");
 	}
 
 }
