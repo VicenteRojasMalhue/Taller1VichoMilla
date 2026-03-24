@@ -1,12 +1,12 @@
 package logica;
 // Vicente Ignacio Rojas Malhue / ICCI / 21.894.251-2
-//
+// Millaray Belen Zepeda Salfate/ ICCI / 22.063.994-0
 
 public class Main {
 	
 	public static void main(String[] args)	{
 		
-		System.out.println("parece que funciona");
+		System.out.println("nasa me gusta tu mama");
 	}
 
 }
