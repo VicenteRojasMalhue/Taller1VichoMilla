@@ -91,6 +91,7 @@ public static void main(String[] args) throws FileNotFoundException {
 
                         if (acceso == 1) {
                         	int opcion1 = 0;
+                        	System.out.println(" ");
                             System.out.println("Acceso permitido");
                             System.out.println(" ");
                             System.out.println("Bienvenido "+ logrado+ "!");
@@ -105,23 +106,28 @@ public static void main(String[] args) throws FileNotFoundException {
                             while (opcion1 != 5) {
                             	System.out.print("");
                             	opcion1 = opcion.nextInt();
+                   
                             	
                             	if (opcion1 == 5) {
-                            		opcion1 = 3; //cierra todo
+                            		numero = 3; //cierra todo
                             		break;
                                 }
                             	switch(opcion1) {
                             	case 1:
-                            		System.out.println("111");
+                            		System.out.println(" ");
+                            		System.out.println("Cual actividad deseas Registrar?");
                             		break;
                             	case 2:
-                            		System.out.println("222");
+                            		System.out.println(" ");
+                            		System.out.println("Cual actividad deseas modificar?");
                             		break;
                             	case 3:
-                            		System.out.println("333");
+                            		System.out.println(" ");
+                            		System.out.println("Cual actividad deseas Eliminar?");
                             		break;
                             	case 4:
-                            		System.out.println("444");
+                            		System.out.println(" ");
+                            		System.out.println("Cambiar contraseña");
                             		break;
                             	case 5:
                                     System.out.println("Saliendo programa total");
@@ -160,16 +166,20 @@ public static void main(String[] args) throws FileNotFoundException {
                         }
                     	switch(numero2) {
                     	case 1:
-                    		System.out.println("11");
+                    		System.out.println(" ");
+                    		System.out.println("Actividad más realizada: ");
                     		break;
                     	case 2:
-                    		System.out.println("22");
+                    		System.out.println(" ");
+                    		System.out.println("Actividades más realizada por cada usuario");
                     		break;
                     	case 3:
-                    		System.out.println("33");
+                    		System.out.println(" ");
+                    		System.out.println("Usuario con mayor procastinacion: ");
                     		break;
                     	case 4:
-                    		System.out.println("44");
+                    		System.out.println(" ");
+                    		System.out.println("Todas las actividades:");
                     		break;
                     	case 5:
                             System.out.println("Saliendo");
