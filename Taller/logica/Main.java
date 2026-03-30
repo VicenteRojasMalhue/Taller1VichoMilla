@@ -166,29 +166,141 @@ public static void main(String[] args) throws FileNotFoundException {
                         }
                     	switch(numero2) {
                     	case 1:
-                    		System.out.println(" ");
-                    		System.out.println("Actividad más realizada: ");
-                    		break;
+                   
+                    	    System.out.println(" ");
+
+                    	    String actividadGlobal = "";
+                    	    int cantidadMayor = 0;
+
+                    	   
+                    	    for (int m = 0; m < j; m++) {
+
+                    	        String actividadTemporal = actividad[m];
+                    	        int contadorActividad = 0;
+
+                    	       
+                    	        for (int n = 0; n < j; n++) {
+                    	            if (actividad[n].equals(actividadTemporal)) {
+                    	                contadorActividad++;
+                    	            }
+                    	        }
+                    	        if (contadorActividad > cantidadMayor) {
+                    	            cantidadMayor = contadorActividad;
+                    	            actividadGlobal = actividadTemporal;
+                    	        }
+                    	    }
+
+                    	    System.out.println("Actividad más realizada: ");
+                    	    System.out.println(actividadGlobal +": " + cantidadMayor + " veces");
+                    	    break;
+               
                     	case 2:
                     		System.out.println(" ");
-                    		System.out.println("Actividades más realizada por cada usuario");
-                    		break;
+                    	    System.out.println("Actividades más realizada por cada usuario:");
+
+                    	    for (int x = 0; x < i; x++) {
+
+                    	        String usuarioActual = usuarios[x];
+
+                    	        boolean yaMostrado = false;
+                    	        for (int z = 0; z < x; z++) {
+                    	            if (usuarios[z].equals(usuarioActual)) {
+                    	                yaMostrado = true;
+                    	                break;
+                    	            }
+                    	        }
+                    	        if (yaMostrado) continue;
+
+                    	        String actividadMas = "";
+                    	        int maxHoras = 0;
+
+                    	        for (int a = 0; a < j; a++) {
+
+                    	            if (nombres[a].equals(usuarioActual)) {
+
+                    	                String act = actividad[a];
+                    	                int sumaHoras = 0;
+
+                    	                for (int b = 0; b < j; b++) {
+                    	                    if (nombres[b].equals(usuarioActual) && actividad[b].equals(act)) {
+                    	                        sumaHoras += Integer.parseInt(hora[b]); 
+                    	                    }
+                    	                }
+
+                    	                if (sumaHoras > maxHoras) {
+                    	                    maxHoras = sumaHoras;
+                    	                    actividadMas = act;
+                    	                }
+                    	            }
+                    	        }
+
+                    	        if (maxHoras > 0) {
+                    	            System.out.println("* " + usuarioActual + " -> " + actividadMas + " -> con " + maxHoras + " horas registradas");
+                    	        }
+                    	    }
+                    	    break;
                     	case 3:
-                    		System.out.println(" ");
-                    		System.out.println("Usuario con mayor procastinacion: ");
-                    		break;
+                    	    System.out.println(" ");
+
+                    	    String usuarioProcrastinador = "";
+                    	    int mayorHoras = 0;
+
+                
+                    	    for (int p = 0; p < i; p++) {
+
+                    	        String usuarioActual = usuarios[p];
+
+     
+                    	        boolean repetido = false;
+                    	        for (int q = 0; q < p; q++) {
+                    	            if (usuarios[q].equals(usuarioActual)) {
+                    	                repetido = true;
+                    	                break;
+                    	            }
+                    	        }
+
+                    	        if (repetido == false) {
+
+                    	            int horasTotales = 0;
+
+                    	            for (int r = 0; r < j; r++) {
+                    	                if (nombres[r].equals(usuarioActual)) {
+                    	                    horasTotales = horasTotales + Integer.parseInt(hora[r]);
+                    	                }
+                    	            }
+                    	            if (horasTotales > mayorHoras) {
+                    	                mayorHoras = horasTotales;
+                    	                usuarioProcrastinador = usuarioActual;
+                    	            }
+                    	        }
+                    	    }
+
+                    	    System.out.println("Usuario con mayor procrastinación: ");
+                    	    System.out.println(usuarioProcrastinador +": " + mayorHoras + " horas registradas");
+                    	    break;
                     	case 4:
-                    		System.out.println(" ");
-                    		System.out.println("Todas las actividades:");
-                    		break;
+                    	    System.out.println(" ");
+                    	    System.out.println("Todas las actividades:");
+
+                    	    for (int s = 0; s < j; s++) {
+
+                    	        System.out.println(
+                    	            (s + 1) + ") " +
+                    	            nombres[s] + ";" +
+                    	            fecha[s] + ";" +
+                    	            hora[s] + ";" +
+                    	            actividad[s]
+                    	        );
+                    	    }
+
+                    	    break;
                     	case 5:
                             System.out.println("Saliendo");
                             break;
        
                     	default:
                     		System.out.println("otra vez:");
-               
-                    		
+
                     	}
                     }
                     break;
@@ -205,5 +317,4 @@ public static void main(String[] args) throws FileNotFoundException {
 
         opcion.close();
 	}
-
 }
