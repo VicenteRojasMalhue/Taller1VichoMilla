@@ -58,13 +58,13 @@ public static void main(String[] args) throws FileNotFoundException {
 		//menu
 		int numero = 0; 
 
-        //menu
-        System.out.println("\n1) Menu de Usuarios");
-        System.out.println("2) Menu de Analisis");
-        System.out.println("3) Salir");
+        
 
         //opciones
         while (numero != 3) {
+        	System.out.println("\n1) Menu de Usuarios");
+            System.out.println("2) Menu de Analisis");
+            System.out.println("3) Salir");
             System.out.print("");
             numero = opcion.nextInt(); // toma la opcion
 
@@ -94,22 +94,23 @@ public static void main(String[] args) throws FileNotFoundException {
                         	System.out.println(" ");
                             System.out.println("Acceso permitido");
                             System.out.println(" ");
-                            System.out.println("Bienvenido "+ logrado+ "!");
-                            System.out.println(" ");
-                            System.out.println("Que deseas realizar?\r\n"
-                            		+ "\r\n"
-                            		+ "1) Registrar actividad.\r\n"
-                            		+ "2) Modificar actividad.\r\n"
-                            		+ "3) Eliminar actividad.\r\n"
-                            		+ "4) Cambiar contraseña.\r\n"
-                            		+ "5) Salir.");
+                            
                             while (opcion1 != 5) {
+                            	System.out.println("Bienvenido "+ logrado+ "!");
+                                System.out.println(" ");
+                                System.out.println("Que deseas realizar?\r\n"
+                                		+ "\r\n"
+                                		+ "1) Registrar actividad.\r\n"
+                                		+ "2) Modificar actividad.\r\n"
+                                		+ "3) Eliminar actividad.\r\n"
+                                		+ "4) Cambiar contraseña.\r\n"
+                                		+ "5) Salir.");
                             	System.out.print("");
                             	opcion1 = opcion.nextInt();
                    
                             	
                             	if (opcion1 == 5) {
-                            		numero = 3; //cierra todo
+                            		
                             		break;
                                 }
                             	switch(opcion1) {
@@ -146,23 +147,24 @@ public static void main(String[] args) throws FileNotFoundException {
                 case 2:
                 	int numero2 = 0; 
                 	
-                    System.out.println("\r\n"
-                    		+"Bienvenido al menu de analisis!\r\n"
-                    		+ "\r\n"
-                    		+ "Que deseas realizar?\r\n"
-                    		+ "\r\n"
-                    		+ "1) Actividad más realizada\r\n"
-                    		+ "2) Actividad más realizada por cada usuario\r\n"
-                    		+ "3) Usuario con mayor procastinacion\r\n"
-                    		+ "4) Ver todas las actividades\r\n"
-                    		+ "5) Salir");
+                 
                     while (numero2 != 5) {
+                    	System.out.println("\r\n"
+                        		+"Bienvenido al menu de analisis!\r\n"
+                        		+ "\r\n"
+                        		+ "Que deseas realizar?\r\n"
+                        		+ "\r\n"
+                        		+ "1) Actividad más realizada\r\n"
+                        		+ "2) Actividad más realizada por cada usuario\r\n"
+                        		+ "3) Usuario con mayor procastinacion\r\n"
+                        		+ "4) Ver todas las actividades\r\n"
+                        		+ "5) Salir");
                     	System.out.print("");
                         numero2 = opcion.nextInt();
                         
-                        if (numero2 == 5) {
-                            numero = 3; //cierra todo
-                            break;
+                        if (numero2 == 5) {//regresa al inicio
+                        	
+                            break; // solo sale del while(opcion1)    
                         }
                     	switch(numero2) {
                     	case 1:
@@ -300,7 +302,8 @@ public static void main(String[] args) throws FileNotFoundException {
        
                     	default:
                     		System.out.println("otra vez:");
-
+               
+                    		
                     	}
                     }
                     break;
