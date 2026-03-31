@@ -2,8 +2,11 @@ package logica;
 // Vicente Ignacio Rojas Malhue / ICCI / 21.894.251-2
 // Millaray Belen Zepeda Salfate/ ICCI / 22.063.994-0
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -28,6 +31,8 @@ public static void main(String[] args) throws FileNotFoundException {
             contrasenas[i] = partes1[1];
             i++;
 		}
+		
+		int NUsuarios = i;
 		
 		input1.close();
 		
@@ -193,6 +198,7 @@ public static void main(String[] args) throws FileNotFoundException {
                             		hora[NActividades] = laHora;
                             		actividad[NActividades] = laActividad;
                             		NActividades++;
+                            		LInput.close();
 
                             		break;
                             	case 2:
@@ -205,7 +211,18 @@ public static void main(String[] args) throws FileNotFoundException {
                             		break;
                             	case 4:
                             		System.out.println(" ");
-                            		System.out.println("Cambiar contraseña");
+                            		System.out.print("Nueva contraseña: ");
+                            		LInput = new Scanner(System.in);
+                            		String newContra = LInput.nextLine();
+                            		
+                                    for (int k = 0; k < NUsuarios; k++) {
+                                        if (usuarios[k].equals(persona)) {
+                                            contrasenas[k] = newContra;
+                                            break;
+                                        }
+                                    }
+                            		
+                            		
                             		break;
                             	case 5:
                                     System.out.println("Saliendo programa total");
@@ -396,5 +413,20 @@ public static void main(String[] args) throws FileNotFoundException {
         }
 
         opcion.close();
+        
+        //GUARDADO O SOBREESCRITURA DE ARCHIVOS
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("Usuarios.txt"));
+
+            for (j = 0; j < NUsuarios; j++) {
+                writer.write(usuarios[j] + ";" + contrasenas[j]);
+                writer.newLine();
+            }
+
+            writer.close();
+
+        } catch (IOException e) {
+            System.out.println("Error al escribir el archivo");
+        }
 	}
 }
