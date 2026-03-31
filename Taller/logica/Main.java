@@ -53,6 +53,8 @@ public static void main(String[] args) throws FileNotFoundException {
 
 		}
 		
+		int NActividades = j;
+		
 		input2.close();
 		
 		//menu
@@ -115,8 +117,83 @@ public static void main(String[] args) throws FileNotFoundException {
                                 }
                             	switch(opcion1) {
                             	case 1:
+                            		
                             		System.out.println(" ");
-                            		System.out.println("Cual actividad deseas Registrar?");
+                            		Scanner LInput = new Scanner(System.in);
+                            		
+                            		int dia = 0;
+                            		int mes = 0;
+                            		int año = 0;
+                            		int tiempo = 0;
+                            		
+                            		boolean valorValido = false;
+                            		
+                            		//pidiendo un dia
+                            		while (!valorValido) {
+                            		    try {
+                            		        System.out.print("dia: ");
+                            		        dia = LInput.nextInt();
+                            		        valorValido = true;
+                            		    } catch (Exception e) {
+                            		        System.out.println("Error: debes ingresar un número");
+
+                            		        LInput.nextLine();
+                            		    }
+                            		}
+                            		
+                            		// pidiendo el mes
+                            		valorValido = false;
+                            		while (!valorValido) {
+                            		    try {
+                            		        System.out.print("mes: ");
+                            		        mes = LInput.nextInt();
+                            		        valorValido = true;
+                            		    } catch (Exception e) {
+                            		        System.out.println("Error: debes ingresar un número");
+
+                            		        LInput.nextLine();
+                            		    }
+                            		}
+                            		
+                            		//pidiendo año
+                            		valorValido = false;
+                            		while (!valorValido) {
+                            		    try {
+                            		        System.out.print("año: ");
+                            		        año = LInput.nextInt();
+                            		        valorValido = true;
+                            		    } catch (Exception e) {
+                            		        System.out.println("Error: debes ingresar un número");
+
+                            		        LInput.nextLine();
+                            		    }
+                            		}
+                            		//pidiendo horas procrastinadas
+                            		valorValido = false;
+                            		while (!valorValido) {
+                            		    try {
+                            		        System.out.print("Horas Procrastinadas: ");
+                            		        tiempo = LInput.nextInt();
+                            		        LInput.nextLine();
+                            		        valorValido = true;
+                            		    } catch (Exception e) {
+                            		        System.out.println("Error: debes ingresar un número");
+                            		    }
+                            		}
+                            		//guardando la fecha en un string
+                            		String laFecha = dia + "/" + mes + "/" + año;
+                            		System.out.print("Actividad: ");
+                            		String laActividad = LInput.nextLine();
+                            		System.out.println("");
+                            		String laHora = tiempo + "";
+                            		
+                            		
+                            		nombres[NActividades] = logrado;
+                            		fecha[NActividades] = laFecha;
+                            		hora[NActividades] = laHora;
+                            		actividad[NActividades] = laActividad;
+                            		NActividades++;
+
                             		break;
                             	case 2:
                             		System.out.println(" ");
@@ -284,7 +361,7 @@ public static void main(String[] args) throws FileNotFoundException {
                     	    System.out.println(" ");
                     	    System.out.println("Todas las actividades:");
 
-                    	    for (int s = 0; s < j; s++) {
+                    	    for (int s = 0; s < NActividades; s++) {
 
                     	        System.out.println(
                     	            (s + 1) + ") " +
