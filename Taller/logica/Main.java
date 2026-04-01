@@ -427,7 +427,15 @@ public static void main(String[] args) throws FileNotFoundException {
                 writer.write(usuarios[j] + ";" + contrasenas[j]);
                 writer.newLine();
             }
+            
+            BufferedWriter writer2 = new BufferedWriter(new FileWriter("Registros.txt"));
+
+            for (j = 0; j < NActividades; j++) {
+                writer2.write(nombres[j] + ";" + fecha[j] + ";" + hora[j] + ";" + actividad[j]);
+                writer2.newLine();
+            }
             writer.close();
+            writer2.close();
 
 
         } catch (IOException e) {
