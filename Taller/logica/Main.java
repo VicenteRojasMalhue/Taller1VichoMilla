@@ -124,7 +124,6 @@ public static void main(String[] args) throws FileNotFoundException {
                             	case 1:
                             		
                             		System.out.println(" ");
-                            		Scanner LInput = new Scanner(System.in);
                             		
                             		int dia = 0;
                             		int mes = 0;
@@ -137,12 +136,12 @@ public static void main(String[] args) throws FileNotFoundException {
                             		while (!valorValido) {
                             		    try {
                             		        System.out.print("dia: ");
-                            		        dia = LInput.nextInt();
+                            		        dia = opcion.nextInt();
                             		        valorValido = true;
                             		    } catch (Exception e) {
                             		        System.out.println("Error: debes ingresar un número");
 
-                            		        LInput.nextLine();
+                            		        opcion.nextLine();
                             		    }
                             		}
                             		
@@ -151,12 +150,12 @@ public static void main(String[] args) throws FileNotFoundException {
                             		while (!valorValido) {
                             		    try {
                             		        System.out.print("mes: ");
-                            		        mes = LInput.nextInt();
+                            		        mes = opcion.nextInt();
                             		        valorValido = true;
                             		    } catch (Exception e) {
                             		        System.out.println("Error: debes ingresar un número");
 
-                            		        LInput.nextLine();
+                            		        opcion.nextLine();
                             		    }
                             		}
                             		
@@ -165,12 +164,12 @@ public static void main(String[] args) throws FileNotFoundException {
                             		while (!valorValido) {
                             		    try {
                             		        System.out.print("año: ");
-                            		        año = LInput.nextInt();
+                            		        año = opcion.nextInt();
                             		        valorValido = true;
                             		    } catch (Exception e) {
                             		        System.out.println("Error: debes ingresar un número");
 
-                            		        LInput.nextLine();
+                            		        opcion.nextLine();
                             		    }
                             		}
                             		//pidiendo horas procrastinadas
@@ -178,8 +177,8 @@ public static void main(String[] args) throws FileNotFoundException {
                             		while (!valorValido) {
                             		    try {
                             		        System.out.print("Horas Procrastinadas: ");
-                            		        tiempo = LInput.nextInt();
-                            		        LInput.nextLine();
+                            		        tiempo = opcion.nextInt();
+                            		        opcion.nextLine();
                             		        valorValido = true;
                             		    } catch (Exception e) {
                             		        System.out.println("Error: debes ingresar un número");
@@ -188,7 +187,7 @@ public static void main(String[] args) throws FileNotFoundException {
                             		//guardando la fecha en un string
                             		String laFecha = dia + "/" + mes + "/" + año;
                             		System.out.print("Actividad: ");
-                            		String laActividad = LInput.nextLine();
+                            		String laActividad = opcion.nextLine();
                             		System.out.println("");
                             		String laHora = tiempo + "";
                             		
@@ -198,7 +197,7 @@ public static void main(String[] args) throws FileNotFoundException {
                             		hora[NActividades] = laHora;
                             		actividad[NActividades] = laActividad;
                             		NActividades++;
-                            		LInput.close();
+
 
                             		break;
                             	case 2:
@@ -212,8 +211,8 @@ public static void main(String[] args) throws FileNotFoundException {
                             	case 4:
                             		System.out.println(" ");
                             		System.out.print("Nueva contraseña: ");
-                            		LInput = new Scanner(System.in);
-                            		String newContra = LInput.nextLine();
+                            		opcion = new Scanner(System.in);
+                            		String newContra = opcion.nextLine();
                             		
                                     for (int k = 0; k < NUsuarios; k++) {
                                         if (usuarios[k].equals(persona)) {
@@ -269,13 +268,13 @@ public static void main(String[] args) throws FileNotFoundException {
                     	    int cantidadMayor = 0;
 
                     	   
-                    	    for (int m = 0; m < j; m++) {
+                    	    for (int m = 0; m < NActividades; m++) {
 
                     	        String actividadTemporal = actividad[m];
                     	        int contadorActividad = 0;
 
                     	       
-                    	        for (int n = 0; n < j; n++) {
+                    	        for (int n = 0; n < NActividades; n++) {
                     	            if (actividad[n].equals(actividadTemporal)) {
                     	                contadorActividad++;
                     	            }
@@ -292,49 +291,55 @@ public static void main(String[] args) throws FileNotFoundException {
                
                     	case 2:
                     		System.out.println(" ");
-                    	    System.out.println("Actividades más realizada por cada usuario:");
+                    		System.out.println("\nActividades más realizada por cada usuario:");
 
-                    	    for (int x = 0; x < i; x++) {
+                            for (int x = 0; x < i; x++) {
 
-                    	        String usuarioActual = usuarios[x];
+                                String usuarioActual = usuarios[x];
+                                boolean yaMostrado = false;
 
-                    	        boolean yaMostrado = false;
-                    	        for (int z = 0; z < x; z++) {
-                    	            if (usuarios[z].equals(usuarioActual)) {
-                    	                yaMostrado = true;
-                    	                break;
-                    	            }
-                    	        }
-                    	        if (yaMostrado) continue;
+                                for (int z = 0; z < x; z++) {
+                                    if (usuarios[z].equals(usuarioActual)) {
+                                        yaMostrado = true;
+                                        break;
+                                    }
+                                }
 
-                    	        String actividadMas = "";
-                    	        int maxHoras = 0;
+                                //para que continue 
+                                if (yaMostrado == false) {
 
-                    	        for (int a = 0; a < j; a++) {
+                                    String actividadMas = "";
+                                    int maxHoras = 0;
 
-                    	            if (nombres[a].equals(usuarioActual)) {
+                                    for (int a = 0; a < NActividades; a++) {
 
-                    	                String act = actividad[a];
-                    	                int sumaHoras = 0;
+                                        if (nombres[a].equals(usuarioActual)) {
 
-                    	                for (int b = 0; b < j; b++) {
-                    	                    if (nombres[b].equals(usuarioActual) && actividad[b].equals(act)) {
-                    	                        sumaHoras += Integer.parseInt(hora[b]); 
-                    	                    }
-                    	                }
+                                            String act = actividad[a];
+                                            int sumaHoras = 0;
 
-                    	                if (sumaHoras > maxHoras) {
-                    	                    maxHoras = sumaHoras;
-                    	                    actividadMas = act;
-                    	                }
-                    	            }
-                    	        }
+                                            for (int b = 0; b < NActividades; b++) {
+                                                if (nombres[b].equals(usuarioActual)
+                                                        && actividad[b].equals(act)) {
+                                                    sumaHoras += Integer.parseInt(hora[b]);
+                                                }
+                                            }
 
-                    	        if (maxHoras > 0) {
-                    	            System.out.println("* " + usuarioActual + " -> " + actividadMas + " -> con " + maxHoras + " horas registradas");
-                    	        }
-                    	    }
-                    	    break;
+                                            if (sumaHoras > maxHoras) {
+                                                maxHoras = sumaHoras;
+                                                actividadMas = act;
+                                            }
+                                        }
+                                    }
+
+                                    if (maxHoras > 0) {
+                                        System.out.println("* " + usuarioActual + " -> " + actividadMas
+                                                + " -> " + maxHoras + " horas");
+                                    }
+                                }
+                            }
+
+                            break;
                     	case 3:
                     	    System.out.println(" ");
 
@@ -359,7 +364,7 @@ public static void main(String[] args) throws FileNotFoundException {
 
                     	            int horasTotales = 0;
 
-                    	            for (int r = 0; r < j; r++) {
+                    	            for (int r = 0; r < NActividades; r++) {
                     	                if (nombres[r].equals(usuarioActual)) {
                     	                    horasTotales = horasTotales + Integer.parseInt(hora[r]);
                     	                }
@@ -422,11 +427,12 @@ public static void main(String[] args) throws FileNotFoundException {
                 writer.write(usuarios[j] + ";" + contrasenas[j]);
                 writer.newLine();
             }
-
             writer.close();
+
 
         } catch (IOException e) {
             System.out.println("Error al escribir el archivo");
+            
         }
 	}
 }
