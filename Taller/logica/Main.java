@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Main {
@@ -203,10 +204,40 @@ public static void main(String[] args) throws FileNotFoundException {
                             	case 2:
                             		System.out.println(" ");
                             		System.out.println("Cual actividad deseas modificar?");
+                            		System.out.println(" ");
+                            		
+                            		int [] listaDeIndices = new int [NActividades];
+                            		int contadorLista = 0;
+                            		
+                            		for (int contador = 0; contador < NActividades; contador++) {
+										if (nombres[contador].equals(logrado)) {
+											System.out.println((contador + 1) + ") " + nombres[contador] + ";" + fecha[contador] + ";" + hora[contador] + ";" + actividad[contador]);
+											listaDeIndices[contadorLista] = contador;
+											contadorLista++;
+											
+										}
+                            		}
+                            		System.out.print(" ");
+                            		System.out.print("eleccion: ");
+                            		String modificar = opcion.nextLine();
+                            		// ciclo para verifiar si el indice es de user
+                            		
+                            		//
+                            		
+                            		
                             		break;
                             	case 3:
                             		System.out.println(" ");
                             		System.out.println("Cual actividad deseas Eliminar?");
+                            		System.out.println(" ");
+                            		
+                            		for (int contador = 0; contador < NActividades; contador++) {
+										if (nombres[contador].equals(logrado)) {
+											System.out.println((contador + 1) + ") " + nombres[contador] + ";" + fecha[contador] + ";" + hora[contador] + ";" + actividad[contador]);
+											
+										}
+										
+									}
                             		break;
                             	case 4:
                             		System.out.println(" ");
