@@ -14,6 +14,8 @@ public class Main {
 	
 public static void main(String[] args) throws FileNotFoundException {
 		
+		int[] diasPorMes = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		
 		Scanner opcion = new Scanner(System.in);
 		//lista primer archivo
 		String[] usuarios = new String[300];
@@ -128,23 +130,9 @@ public static void main(String[] args) throws FileNotFoundException {
                             		
                             		int dia = 0;
                             		int mes = 0;
-                            		int año = 0;
                             		int tiempo = 0;
                             		
                             		boolean valorValido = false;
-                            		
-                            		//pidiendo un dia
-                            		while (!valorValido) {
-                            		    try {
-                            		        System.out.print("dia: ");
-                            		        dia = opcion.nextInt();
-                            		        valorValido = true;
-                            		    } catch (Exception e) {
-                            		        System.out.println("Error: debes ingresar un número");
-
-                            		        opcion.nextLine();
-                            		    }
-                            		}
                             		
                             		// pidiendo el mes
                             		valorValido = false;
@@ -152,27 +140,45 @@ public static void main(String[] args) throws FileNotFoundException {
                             		    try {
                             		        System.out.print("mes: ");
                             		        mes = opcion.nextInt();
+                            		        opcion.nextLine();
+                            		        while (mes <= 0 || mes > 12) {
+                            		        	System.out.println("Mes no valido (no existe)");
+                            		        	System.out.println(" ");
+                                		        System.out.print("mes: ");
+                            		        	mes = opcion.nextInt();
+                            		        	opcion.nextLine();
+											}
                             		        valorValido = true;
                             		    } catch (Exception e) {
                             		        System.out.println("Error: debes ingresar un número");
-
                             		        opcion.nextLine();
                             		    }
                             		}
                             		
-                            		//pidiendo año
+                            		//pidiendo el dia
                             		valorValido = false;
                             		while (!valorValido) {
                             		    try {
-                            		        System.out.print("año: ");
-                            		        año = opcion.nextInt();
+                            		        System.out.print("dia: ");
+                            		        dia = opcion.nextInt();
+                            		        do {
+												if (dia <= 0 || dia > diasPorMes[mes-1]) {
+													System.out.println("Dia no valido (no existe)");
+													System.out.print("dia: ");
+		                            		        dia = opcion.nextInt();
+												} else {
+													valorValido = true;
+												}
+											} while (!valorValido);
+											
                             		        valorValido = true;
                             		    } catch (Exception e) {
                             		        System.out.println("Error: debes ingresar un número");
-
                             		        opcion.nextLine();
                             		    }
                             		}
+                            		
+                            		
                             		//pidiendo horas procrastinadas
                             		valorValido = false;
                             		while (!valorValido) {
@@ -183,10 +189,21 @@ public static void main(String[] args) throws FileNotFoundException {
                             		        valorValido = true;
                             		    } catch (Exception e) {
                             		        System.out.println("Error: debes ingresar un número");
+                            		        opcion.nextLine();
                             		    }
                             		}
                             		//guardando la fecha en un string
-                            		String laFecha = dia + "/" + mes + "/" + año;
+                            		String laFecha = null;
+                            		if (dia < 10 && mes > 9) {
+                            			laFecha = "0" + dia + "/" + mes + "/2026";
+									} else if (dia < 10 && mes < 10) {
+										laFecha = "0" + dia + "/0" + mes + "/2026";
+									} else if (dia > 9 && mes > 9) {
+										laFecha = dia + "/" + mes + "/2026";
+									}else {
+										laFecha = dia + "/0" + mes + "/2026";
+									}
+                            		
                             		System.out.print("Actividad: ");
                             		String laActividad = opcion.nextLine();
                             		System.out.println("");
@@ -198,6 +215,8 @@ public static void main(String[] args) throws FileNotFoundException {
                             		hora[NActividades] = laHora;
                             		actividad[NActividades] = laActividad;
                             		NActividades++;
+                            		System.out.println("-- la actividad a sido registrada con exito!");
+                            		System.out.println(" ");
 
 
                             		break;
@@ -211,18 +230,143 @@ public static void main(String[] args) throws FileNotFoundException {
                             		
                             		for (int contador = 0; contador < NActividades; contador++) {
 										if (nombres[contador].equals(logrado)) {
-											System.out.println((contador + 1) + ") " + nombres[contador] + ";" + fecha[contador] + ";" + hora[contador] + ";" + actividad[contador]);
+											System.out.println((contadorLista + 1) + ") " + nombres[contador] + ";" + fecha[contador] + ";" + hora[contador] + ";" + actividad[contador]);
 											listaDeIndices[contadorLista] = contador;
 											contadorLista++;
 											
 										}
                             		}
-                            		System.out.print(" ");
-                            		System.out.print("eleccion: ");
-                            		String modificar = opcion.nextLine();
-                            		// ciclo para verifiar si el indice es de user
+                            		System.out.println(" ");
+                            		int elegirModificar = 0;
                             		
-                            		//
+                            		// ciclo para verifiar si el indice es de user seleccionado
+                            		valorValido = false;
+                            		while (!valorValido) {
+                            		    try {
+                            		    	while ((elegirModificar <= 0) || (elegirModificar > contadorLista)) {
+                            		    		System.out.print("eleccion: ");
+                                		        elegirModificar = opcion.nextInt();
+                                		        opcion.nextLine();
+                                		        if ((elegirModificar <= 0) || (elegirModificar > contadorLista)) {
+													System.out.println("error, indice de actividad no valido");
+													System.out.println(" ");
+													valorValido = false;
+												} else {
+													valorValido = true;
+												}
+                                		        
+											}
+                            		    } catch (Exception e) {
+                            		        System.out.println("Error: debes ingresar un número");
+                            		        opcion.nextLine();
+                            		    }
+                            		}
+                            		//con esto, la eleccion del user estara dentro del rango de opciones, y podremos sacar el indice de la lista completa de actividades
+                            		elegirModificar = elegirModificar - 1; //para que este en formato indice, ya que el usuario eligio la actividad a modificar como numero del 1 a n actividades hechas, y java lee desde el indice 0
+                            		//ahora tenemos que preguntar que se desea modificar
+                            		valorValido = false;
+                            		int opcionDeModificar = 0;
+                            		while (!valorValido) {
+                            		    try {
+                            		    	while ((opcionDeModificar <= 0 ) || (opcionDeModificar > 3)) {
+                            		    		System.out.println(" ");
+                            		    		System.out.println("Que deseas modificar?");
+                            		    		System.out.println(" ");
+                            		    		System.out.println("1) Fecha");
+                            		    		System.out.println("2) Actividad");
+                            		    		System.out.println("3) Volver");
+                            		    		System.out.println(" ");
+                            		    		
+                                		        opcionDeModificar = opcion.nextInt();
+                                		        opcion.nextLine();
+                                		        if ((opcionDeModificar <= 0) || (opcionDeModificar > 3)) {
+													System.out.println("Opcion no valida");
+													System.out.println(" ");
+													valorValido = false;
+												} else {
+													valorValido = true;
+												}
+											}
+                            		    } catch (Exception e) {
+                            		        System.out.println("Error: debes ingresar un número");
+                            		        opcion.nextLine();
+                            		    }
+                            		}
+                            		
+                            		if (opcionDeModificar == 1) {
+                            			//editarFecha
+                            			dia = 0;
+                                		mes = 0;
+                            			//pidiendo el mes (copiado del codigo hecho para la verificacion de la fecha
+                                		valorValido = false;
+                                		while (!valorValido) {
+                                		    try {
+                                		        System.out.print("mes: ");
+                                		        mes = opcion.nextInt();
+                                		        opcion.nextLine();
+                                		        while (mes <= 0 || mes > 12) {
+                                		        	System.out.println("Mes no valido (no existe)");
+                                		        	System.out.println(" ");
+                                    		        System.out.print("mes: ");
+                                		        	mes = opcion.nextInt();
+                                		        	opcion.nextLine();
+    											}
+                                		        valorValido = true;
+                                		    } catch (Exception e) {
+                                		        System.out.println("Error: debes ingresar un número");
+                                		        opcion.nextLine();
+                                		    }
+                                		}
+                                		
+                                		//pidiendo el dia
+                                		valorValido = false;
+                                		while (!valorValido) {
+                                		    try {
+                                		        System.out.print("dia: ");
+                                		        dia = opcion.nextInt();
+                                		        do {
+    												if (dia <= 0 || dia > diasPorMes[mes-1]) {
+    													System.out.println("Dia no valido (no existe)");
+    													System.out.print("dia: ");
+    		                            		        dia = opcion.nextInt();
+    												} else {
+    													valorValido = true;
+    												}
+    											} while (!valorValido);
+    											
+                                		        valorValido = true;
+                                		    } catch (Exception e) {
+                                		        System.out.println("Error: debes ingresar un número");
+                                		        opcion.nextLine();
+                                		    }
+                                		}
+                                		
+                                		//guardando la fecha en un string
+                                		laFecha = null;
+                                		if (dia < 10 && mes > 9) {
+                                			laFecha = "0" + dia + "/" + mes + "/2026";
+    									} else if (dia < 10 && mes < 10) {
+    										laFecha = "0" + dia + "/0" + mes + "/2026";
+    									} else if (dia > 9 && mes > 9) {
+    										laFecha = dia + "/" + mes + "/2026";
+    									}else {
+    										laFecha = dia + "/0" + mes + "/2026";
+    									}
+                                		
+                                		//ahora tenemos que modificar la fecha de la actividad que elegimos
+                                		
+                                		int indiceAModificar = listaDeIndices[elegirModificar];
+                                		fecha[indiceAModificar] = laFecha;
+                            			
+										
+									} else if (opcionDeModificar == 2) {
+										//editarActividad
+									}else if (opcionDeModificar == 3) {
+										System.out.println("Operacion Cancelada");
+										System.out.println(" ");
+									}
+										
+									
                             		
                             		
                             		break;
