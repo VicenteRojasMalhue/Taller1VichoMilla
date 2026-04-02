@@ -12,10 +12,11 @@ import java.util.Scanner;
 
 public class Main {
 	
-public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException {
 		
+		int tiempo = 0;
 		int[] diasPorMes = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-		
+		int indiceAModificar;
 		Scanner opcion = new Scanner(System.in);
 		//lista primer archivo
 		String[] usuarios = new String[300];
@@ -130,7 +131,6 @@ public static void main(String[] args) throws FileNotFoundException {
                             		
                             		int dia = 0;
                             		int mes = 0;
-                            		int tiempo = 0;
                             		
                             		boolean valorValido = false;
                             		
@@ -161,11 +161,13 @@ public static void main(String[] args) throws FileNotFoundException {
                             		    try {
                             		        System.out.print("dia: ");
                             		        dia = opcion.nextInt();
+                            		        opcion.nextLine();
                             		        do {
 												if (dia <= 0 || dia > diasPorMes[mes-1]) {
 													System.out.println("Dia no valido (no existe)");
 													System.out.print("dia: ");
 		                            		        dia = opcion.nextInt();
+		                            		        opcion.nextLine();
 												} else {
 													valorValido = true;
 												}
@@ -186,6 +188,16 @@ public static void main(String[] args) throws FileNotFoundException {
                             		        System.out.print("Horas Procrastinadas: ");
                             		        tiempo = opcion.nextInt();
                             		        opcion.nextLine();
+                            		        do {
+												if (tiempo <= 0 || tiempo > 24) {
+													System.out.println("tiempo no valido (-tiempo negativo no valido/tiempo + 24 horas no valido-, un dia no dura mas de 24 horas, en el caso de que procrastines todo el dia sin dormir)");
+													System.out.print("Horas Procrastinadas: ");
+		                            		        tiempo = opcion.nextInt();
+		                            		        opcion.nextLine();
+												} else {
+													valorValido = true;
+												}
+											} while (!valorValido);
                             		        valorValido = true;
                             		    } catch (Exception e) {
                             		        System.out.println("Error: debes ingresar un número");
@@ -206,6 +218,7 @@ public static void main(String[] args) throws FileNotFoundException {
                             		
                             		System.out.print("Actividad: ");
                             		String laActividad = opcion.nextLine();
+                            		opcion.nextLine();
                             		System.out.println("");
                             		String laHora = tiempo + "";
                             		
@@ -355,19 +368,49 @@ public static void main(String[] args) throws FileNotFoundException {
                                 		
                                 		//ahora tenemos que modificar la fecha de la actividad que elegimos
                                 		
-                                		int indiceAModificar = listaDeIndices[elegirModificar];
+                                		indiceAModificar = listaDeIndices[elegirModificar];
                                 		fecha[indiceAModificar] = laFecha;
                             			
 										
 									} else if (opcionDeModificar == 2) {
 										//editarActividad
+										tiempo = 0;
+										//pidiendo horas procrastinadas
+	                            		valorValido = false;
+	                            		while (!valorValido) {
+	                            		    try {
+	                            		        System.out.print("Horas Procrastinadas: ");
+	                            		        tiempo = opcion.nextInt();
+	                            		        opcion.nextLine();
+	                            		        do {
+													if (tiempo <= 0 || tiempo > 24) {
+														System.out.println("tiempo no valido (-tiempo negativo no valido/tiempo + 24 horas no valido-, un dia no dura mas de 24 horas, en el caso de que procrastines todo el dia sin dormir)");
+														System.out.print("Horas Procrastinadas: ");
+			                            		        tiempo = opcion.nextInt();
+			                            		        opcion.nextLine();
+													} else {
+														valorValido = true;
+													}
+												} while (!valorValido);
+	                            		        valorValido = true;
+	                            		    } catch (Exception e) {
+	                            		        System.out.println("Error: debes ingresar un número");
+	                            		        opcion.nextLine();
+	                            		    }
+	                            		}
 									}else if (opcionDeModificar == 3) {
 										System.out.println("Operacion Cancelada");
 										System.out.println(" ");
 									}
-										
 									
-                            		
+                            		System.out.print("Actividad: ");
+                            		laActividad = opcion.nextLine();
+                            		System.out.println("");
+                            		laHora = tiempo + "";
+									
+                            		indiceAModificar = listaDeIndices[elegirModificar];
+                            		hora[indiceAModificar] = laHora;
+                            		actividad[indiceAModificar] = laActividad;
                             		
                             		break;
                             	case 3:
