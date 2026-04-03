@@ -16,6 +16,8 @@ public class Main {
 		
 		int tiempo = 0;
 		int[] diasPorMes = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		int [] listaDeIndices;
+		int contadorLista = 0;
 		int indiceAModificar;
 		Scanner opcion = new Scanner(System.in);
 		//lista primer archivo
@@ -238,8 +240,8 @@ public class Main {
                             		System.out.println("Cual actividad deseas modificar?");
                             		System.out.println(" ");
                             		
-                            		int [] listaDeIndices = new int [NActividades];
-                            		int contadorLista = 0;
+                            		listaDeIndices = new int [NActividades];
+                            		contadorLista = 0;
                             		
                             		for (int contador = 0; contador < NActividades; contador++) {
 										if (nombres[contador].equals(logrado)) {
@@ -310,7 +312,7 @@ public class Main {
                             			//editarFecha
                             			dia = 0;
                                 		mes = 0;
-                            			//pidiendo el mes (copiado del codigo hecho para la verificacion de la fecha
+                            			//pidiendo el mes (copiado del codigo hecho para la verificacion de la fecha)
                                 		valorValido = false;
                                 		while (!valorValido) {
                                 		    try {
@@ -418,13 +420,54 @@ public class Main {
                             		System.out.println("Cual actividad deseas Eliminar?");
                             		System.out.println(" ");
                             		
+                            		listaDeIndices = new int [NActividades];
+                            		contadorLista = 0;
+                            		
                             		for (int contador = 0; contador < NActividades; contador++) {
 										if (nombres[contador].equals(logrado)) {
-											System.out.println((contador + 1) + ") " + nombres[contador] + ";" + fecha[contador] + ";" + hora[contador] + ";" + actividad[contador]);
+											System.out.println((contadorLista + 1) + ") " + nombres[contador] + ";" + fecha[contador] + ";" + hora[contador] + ";" + actividad[contador]);
+											listaDeIndices[contadorLista] = contador;
+											contadorLista++;
 											
 										}
-										
-									}
+                            		}
+                            		System.out.println(" ");
+                            		elegirModificar = 0;
+                            		
+                            		
+                            		valorValido = false;
+                            		while (!valorValido) {
+                            		    try {
+                            		    	while ((elegirModificar <= 0) || (elegirModificar > contadorLista)) {
+                            		    		System.out.print("eleccion: ");
+                                		        elegirModificar = opcion.nextInt();
+                                		        opcion.nextLine();
+                                		        if ((elegirModificar <= 0) || (elegirModificar > contadorLista)) {
+													System.out.println("error, indice de actividad no valido");
+													System.out.println(" ");
+													valorValido = false;
+												} else {
+													valorValido = true;
+												}
+                                		        
+											}
+                            		    } catch (Exception e) {
+                            		        System.out.println("Error: debes ingresar un número");
+                            		        opcion.nextLine();
+                            		    }
+                            		}
+                            		
+                            		int indiceABorrar = listaDeIndices[elegirModificar - 1];
+                            		
+                            		for (int k = indiceABorrar; k < NActividades - 1; k++) {
+                            		    nombres[k] = nombres[k + 1];
+                            		    fecha[k] = fecha[k + 1];
+                            		    hora[k] = hora[k + 1];
+                            		    actividad[k] = actividad[k + 1];
+                            		}
+                            		NActividades--;
+                            		System.out.println("Actividad eliminada con éxito.");
+                            		    
                             		break;
                             	case 4:
                             		System.out.println(" ");
