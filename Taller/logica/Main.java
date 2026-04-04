@@ -24,6 +24,9 @@ public class Main {
 		String[] usuarios = new String[300];
         String[] contrasenas = new String[300];
         
+        try {
+			
+		
 		File archivo1 = new File("Usuarios.txt");
 		Scanner input1 = new Scanner(archivo1);
 		
@@ -79,7 +82,10 @@ public class Main {
             System.out.println("2) Menu de Analisis");
             System.out.println("3) Salir");
             System.out.print("");
+            
             numero = opcion.nextInt(); // toma la opcion
+            
+            
 
             switch (numero) {
                 case 1:
@@ -703,5 +709,11 @@ public class Main {
             System.out.println("Error al escribir el archivo");
             
         }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se encontraron los archivos.");
+        } catch (Exception e) {
+            System.out.println("Error inesperado: " + e.getMessage());
+        }
+    
 	}
 }
