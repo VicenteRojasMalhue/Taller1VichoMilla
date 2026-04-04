@@ -488,7 +488,9 @@ public class Main {
                             		    actividad[k] = actividad[k + 1];
                             		}
                             		NActividades--;
-                            		System.out.println("Actividad eliminada con éxito.");
+                            		System.out.println(" ");
+                            		System.out.println("-- Actividad eliminada con éxito.");
+                            		System.out.println(" ");
                             		    
                             		break;
                             	case 4:
@@ -511,7 +513,8 @@ public class Main {
                                     break;
                
                             	default:
-                            		System.out.println("otra vez:");
+                                    System.out.println("Opción inválida, intente nuevamente");
+                                    System.out.println(" ");
                             	}
                             } 
                         } else {
