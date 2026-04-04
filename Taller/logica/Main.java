@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class Main {
@@ -83,7 +82,13 @@ public class Main {
             System.out.println("3) Salir");
             System.out.print("");
             
-            numero = opcion.nextInt(); // toma la opcion
+            try {
+            	numero = opcion.nextInt(); // toma la opcion
+                opcion.nextLine();
+            } catch (Exception e) {
+		        System.out.println("Error: debes ingresar un número");
+		        opcion.nextLine();
+		    }
             
             
 
@@ -125,7 +130,15 @@ public class Main {
                                 		+ "4) Cambiar contraseña.\r\n"
                                 		+ "5) Salir.");
                             	System.out.print("");
-                            	opcion1 = opcion.nextInt();
+                            	try {
+                            		opcion1 = opcion.nextInt();
+                            		opcion.nextLine();
+                            	} catch (Exception e) {
+                    		        System.out.println("Error: debes ingresar un número");
+                    		        opcion.nextLine();
+                    		        opcion1 = 0;
+                    		    }
+                            	
                    
                             	
                             	if (opcion1 == 5) {
@@ -226,7 +239,6 @@ public class Main {
                             		
                             		System.out.print("Actividad: ");
                             		String laActividad = opcion.nextLine();
-                            		opcion.nextLine();
                             		System.out.println("");
                             		String laHora = tiempo + "";
                             		
@@ -381,6 +393,7 @@ public class Main {
                             			
 										
 									} else if (opcionDeModificar == 2) {
+										
 										//editarActividad
 										tiempo = 0;
 										//pidiendo horas procrastinadas
@@ -406,19 +419,22 @@ public class Main {
 	                            		        opcion.nextLine();
 	                            		    }
 	                            		}
+	                            		
+	                            		System.out.print("Actividad: ");
+	                            		laActividad = opcion.nextLine();
+	                            		System.out.println("");
+	                            		laHora = tiempo + "";
+										
+	                            		indiceAModificar = listaDeIndices[elegirModificar];
+	                            		hora[indiceAModificar] = laHora;
+	                            		actividad[indiceAModificar] = laActividad;
+	                            		
 									}else if (opcionDeModificar == 3) {
 										System.out.println("Operacion Cancelada");
 										System.out.println(" ");
 									}
 									
-                            		System.out.print("Actividad: ");
-                            		laActividad = opcion.nextLine();
-                            		System.out.println("");
-                            		laHora = tiempo + "";
-									
-                            		indiceAModificar = listaDeIndices[elegirModificar];
-                            		hora[indiceAModificar] = laHora;
-                            		actividad[indiceAModificar] = laActividad;
+                            		
                             		
                             		break;
                             	case 3:
@@ -520,7 +536,14 @@ public class Main {
                         		+ "4) Ver todas las actividades\r\n"
                         		+ "5) Salir");
                     	System.out.print("");
-                        numero2 = opcion.nextInt();
+                    	try {
+                    		numero2 = opcion.nextInt();
+                    		opcion.nextLine();
+						} catch (Exception e) {
+            		        System.out.println("Error: debes ingresar un número");
+            		        opcion.nextLine();
+						}
+                        
                         
                         if (numero2 == 5) {//regresa al inicio
                         	
@@ -667,7 +690,7 @@ public class Main {
                             break;
        
                     	default:
-                    		System.out.println("otra vez:");
+                    		System.out.println("Opción inválida, intente nuevamente");
                
                     		
                     	}
